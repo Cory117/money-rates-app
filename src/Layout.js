@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 const Layout = (props) => {
   return (
     <React.Fragment>
-      <div className="px-2 mt-2">
-        <Link to="/"><h3 id="title">Money Rates</h3></Link>
-      </div>
-      <hr/>
+      <nav className="navbar navbar-light bg-light">
+        <Link to="/"><span className="navbar-brand mb-0 mx-2 h1">Money Rates</span></Link>
+      </nav>
       <div className="container py-3">
         {props.children}
       </div>

@@ -146,8 +146,8 @@ class CurrencyConverter extends React.Component {
           <h2 className="mb-2">Currency Converter</h2>
           <h4>1 {baseAcronym} to 1 {quoteAcronym} = {rate.toFixed(4)} {currencies[quoteAcronym].name}</h4>
         </div>
-        <form className="form-row p-3 mb-4">
-          <div className="form-group col-md-5">
+        <form className="form-row p-3 mb-4 d-flex justify-content-center align-items-center">
+          <div className="form-group col-md-5 mb-0">
             <select value={baseAcronym} onChange={this.changeBaseAcronym} className="form-control mb-2" disabled={loading}>{currencyOptions}</select>
             <div className="input-group">
               <div className="input-group-prepend">
@@ -157,10 +157,10 @@ class CurrencyConverter extends React.Component {
             </div>
             <small className="text-secondary">{currencies[baseAcronym].name}</small>
           </div>
-          <div className="col-md-5 py-3 mb-3 d-flex justify-content-center align-items-center">
-            <h2>=</h2>
+          <div className="col-md-2 py-3 mb-3 d-flex justify-content-center align-items-center">
+            <h3>=</h3>
           </div>
-          <div className="form-group col-md-5">
+          <div className="form-group col-md-5 mb-0">
             <select value={quoteAcronym} onChange={this.changeQuoteAcronym} className="form-control mb-2" disabled={loading}>{currencyOptions}</select>
             <div className="input-group">
               <div className="input-group-prepend">

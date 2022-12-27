@@ -7,7 +7,7 @@ const CurrencyTable = (props) => {
     return null;
   }
   return (
-    <table className="table table-hover mt-4">
+    <table className="table mt-4">
       <thead>
         <tr>
           <th scope="col"></th>
