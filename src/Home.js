@@ -24,7 +24,7 @@ class Home extends React.Component {
 
   getRatesData = (base) => {
     this.setState({ loading: true });
-    fetch(`https://www.frankfurter.app/latest?base=${base}`)
+    fetch(`https://api.frankfurter.app/latest?base=${base}`)
       .then(checkStatus)
       .then(json)
       .then(data => {
