@@ -5,7 +5,9 @@ const Layout = (props) => {
   return (
     <React.Fragment>
       <nav className="navbar navbar-light bg-light">
-        <Link to="/"><span className="navbar-brand mb-0 mx-2 h1">Money Rates</span></Link>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <span className="navbar-brand mb-0 mx-2 h1">Money Rates</span>
+        </Link>
       </nav>
       <div className="container py-3">
         {props.children}
