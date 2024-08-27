@@ -51,7 +51,7 @@ class CurrencyConverter extends React.Component {
 
   getHistoricalRates = (base, quote) => {
     const endDate = new Date().toISOString().split('T')[0];
-    const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+    const startDate = new Date((new Date()).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
 
     fetch(`https://api.frankfurter.app/${startDate}..${endDate}?from=${base}&to=${quote}`)
       .then(checkStatus)
@@ -76,7 +76,7 @@ class CurrencyConverter extends React.Component {
       this.chart.destroy();
     }
 
-    this.chart = new Chart(this.chartRef.current.getContext("2d"), {
+    this.chart = new Chart(chartRef, {
       type: 'line',
       data: {
         labels,
