@@ -17,3 +17,5 @@ Money rates is an app that lets you track current and historical foreign exchang
 - React Router
 - Bootstrap
 - APIs
+- Chart.js
+- Build: Create React App
