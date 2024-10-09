@@ -1,57 +1,50 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import currencies from "./Currencies";
 import { json, checkStatus } from "./utils";
+import { useLocation } from "react-router-dom";
 
-class CurrencyConverter extends React.Component {
-  constructor(props) {
-    super(props);
+const CurrencyConverter = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
 
-    const params = new URLSearchParams(props.location.search);
+  const [rate, setRate] = useState(0);
+  const [baseAcronym, setBaseAcronym] = useState(params.get('base') || 'USD');
+  const [baseValue, setBaseValue] = useState(0);
+  const [quoteAcronym, setQuoteAcronym] = useState(params.get('quote') || 'JPY');
+  const [quoteValue, setQuoteValue] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-    this.state = {
-      rate: 0,
-      baseAcronym: params.get('base') || 'USD',
-      baseValue: 0,
-      quoteAcronym: params.get('quote') || 'JPY',
-      quoteValue: 0,
-      loading: false,
-    };
-    
-    this.chartRef = React.createRef();
-  }
+  const chartRef = useRef(null);
+  let chartInstance = useRef(null);
 
-  componentDidMount() {
-    const { baseAcronym, quoteAcronym } = this.state;
-    this.getRate(baseAcronym, quoteAcronym);
-    this.getHistoricalRates(baseAcronym, quoteAcronym);
-  }
+  useEffect(() => {
+    getRate(baseAcronym, quoteAcronym);
+    getHistoricalRates(baseAcronym, quoteAcronym);
+  }, [baseAcronym, quoteAcronym]);
 
-  getRate = (base, quote) => {
-    this.setState({ loading: true });
+  const getRate = (base, quote) => {
+    setLoading(true);
     fetch(`https://api.frankfurter.app/latest?base=${base}&symbols=${quote}`)
       .then(checkStatus)
       .then(json)
       .then(data => {
         if (data.error) {
           throw new Error(data.error);
-        }
+        } 
 
-        const rate = data.rates[quote];
-
-        this.setState({
-          rate,
-          baseValue: 1,
-          quoteValue: Number((1 * rate).toFixed(3)),
-          loading: false,
-        })
+        const newRate = data.rates[quote];
+        setRate(newRate);
+        setBaseValue(1);
+        setQuoteValue(Number((1 * newRate).toFixed(3)));
+        setLoading(false);
       })
       .catch(error => console.error(error.message));
-  }
+  };
 
-  getHistoricalRates = (base, quote) => {
+  const getHistoricalRates = (base, quote) => {
     const endDate = new Date().toISOString().split('T')[0];
-    const startDate = new Date((new Date()).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+    const startDate = new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
     fetch(`https://api.frankfurter.app/${startDate}..${endDate}?from=${base}&to=${quote}`)
       .then(checkStatus)
@@ -63,118 +56,134 @@ class CurrencyConverter extends React.Component {
 
         const chartLabels = Object.keys(data.rates);
         const chartData = Object.values(data.rates).map(rate => rate[quote]);
-        const chartLabel = `${base}/${quote}`;
-        this.buildChart(chartLabels, chartData, chartLabel);
+        buildChart(chartLabels, chartData, `${base}/${quote}`);
       })
       .catch(error => console.error(error.message));
-  }
+  };
 
-  buildChart = (labels, data, label) => {
-    const chartRef = this.chartRef.current.getContext("2d");
+  const buildChart = (labels, data, label) => {
+    const chartContext = chartRef.current.getContext("2d");
 
-    if (typeof this.chart !== "undefined") {
-      this.chart.destroy();
+    if (chartInstance.current) {
+      chartInstance.current.destroy();
     }
 
-    this.chart = new Chart(chartRef, {
-      type: 'line',
+    chartInstance.current = new Chart(chartContext, {
+      type: "line",
       data: {
         labels,
         datasets: [
           {
-            label: label,
+            label,
             data,
             fill: false,
             tension: 0,
-          }
-        ]
+          },
+        ],
       },
       options: {
         responsive: true,
-      }
-    })
-  }
+      },
+    });
+  };
 
-  toBase(amount, rate) {
-    return amount * (1 / rate);
-  }
+  const toBase = (amount, rate) => amount * (1 / rate);
+  const toQuote = (amount, rate) => amount * rate;
 
-  toQuote(amount, rate) {
-    return amount * rate;
-  }
-
-  convert(amount, rate, equation) {
+  const convert = (amount, rate, equation) => {
     const input = parseFloat(amount);
-    if (Number.isNaN(input)) {
-      return '';
-    }
+    if (Number.isNaN(input)) { return ''; }
     return equation(input, rate).toFixed(3);
-  }
+  };
 
-  changeBaseAcronym = (event) => {
-    const baseAcronym = event.target.value;
-    this.setState({ baseAcronym });
-    this.getRate(baseAcronym, this.state.quoteAcronym);
-    this.getHistoricalRates(baseAcronym, this.state.quoteAcronym);
-  }
+  const changeBaseAcronym = (event) => {
+    setBaseAcronym(event.target.value);
+  };
 
-  changeBaseValue = (event) => {
-    const quoteValue = this.convert(event.target.value, this.state.rate, this.toQuote);
-    this.setState({ baseValue: event.target.value, quoteValue });
-  }
+  const changeBaseValue = (event) => {
+    const newQuoteValue = convert(event.target.value, rate, toQuote);
+    setBaseValue(event.target.value);
+    setQuoteValue(newQuoteValue);
+  };
 
-  changeQuoteAcronym = (event) => {
-    const quoteAcronym = event.target.value;
-    this.setState({ quoteAcronym });
-    this.getRate(quoteAcronym, this.state.baseAcronym);
-    this.getHistoricalRates(quoteAcronym, this.state.baseAcronym);
-  }
+  const changeQuoteAcronym = (event) => {
+    setQuoteAcronym(event.target.value);
+  };
 
-  changeQuoteValue = (event) => {
-    const baseValue = this.convert(event.target.value, this.state.rate, this.toBase);
-    this.setState({ quoteValue: event.target.value, baseValue });
-  }
+  const changeQuoteValue = (event) => {
+    const newBaseValue = convert(event.target.value, rate, toBase);
+    setQuoteValue(event.target.value);
+    setBaseValue(newBaseValue);
+  };
 
-  render() {
-    const { rate, baseAcronym, baseValue, quoteAcronym, quoteValue, loading } = this.state;
+  const currencyOptions = Object.keys(currencies).map((currencyAcronym) => (
+    <option key={currencyAcronym} value={currencyAcronym}>
+      {currencyAcronym}
+    </option>
+  ));
 
-    const currencyOptions = Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>);
-
-    return (
-      <React.Fragment>
-        <div className="text-center p-3 mb-2">
-          <h2 className="mb-2">Currency Converter</h2>
-          <h4>1 {baseAcronym} to 1 {quoteAcronym} = {rate.toFixed(4)} {currencies[quoteAcronym].name}</h4>
+  return (
+    <React.Fragment>
+      <div className="text-center p-3 mb-2">
+        <h2 className="mb-2">Currency Converter</h2>
+        <h4>
+          1 {baseAcronym} to 1 {quoteAcronym} = {rate.toFixed(4)} {currencies[quoteAcronym].name}
+        </h4>
+      </div>
+      <form className="form-row p-3 mb-4 d-flex justify-content-center align-items-center">
+        <div className="form-group col-md-5 mb-0">
+          <select
+            value={baseAcronym}
+            onChange={changeBaseAcronym}
+            className="form-control mb-2"
+            disabled={loading}
+          >
+            {currencyOptions}
+          </select>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <div className="input-group-text">{currencies[baseAcronym].symbol}</div>
+            </div>
+            <input
+              id="base"
+              className="form-control"
+              value={baseValue}
+              onChange={changeBaseValue}
+              type="number"
+            />
+          </div>
+          <small className="text-secondary">{currencies[baseAcronym].name}</small>
         </div>
-        <form className="form-row p-3 mb-4 d-flex justify-content-center align-items-center">
-          <div className="form-group col-md-5 mb-0">
-            <select value={baseAcronym} onChange={this.changeBaseAcronym} className="form-control mb-2" disabled={loading}>{currencyOptions}</select>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <div className="input-group-text">{currencies[baseAcronym].symbol}</div>
-              </div>
-              <input id="base" className="form-control" value={baseValue} onChange={this.changeBaseValue} type="number"/>
+        <div className="col-md-2 py-3 mb-3 d-flex justify-content-center align-items-center">
+          <h3>=</h3>
+        </div>
+        <div className="form-group col-md-5 mb-0">
+          <select
+            value={quoteAcronym}
+            onChange={changeQuoteAcronym}
+            className="form-control mb-2"
+            disabled={loading}
+          >
+            {currencyOptions}
+          </select>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <div className="input-group-text">{currencies[quoteAcronym].symbol}</div>
             </div>
-            <small className="text-secondary">{currencies[baseAcronym].name}</small>
+            <input
+              id="quote"
+              className="form-control"
+              value={quoteValue}
+              onChange={changeQuoteValue}
+              type="number"
+            />
           </div>
-          <div className="col-md-2 py-3 mb-3 d-flex justify-content-center align-items-center">
-            <h3>=</h3>
-          </div>
-          <div className="form-group col-md-5 mb-0">
-            <select value={quoteAcronym} onChange={this.changeQuoteAcronym} className="form-control mb-2" disabled={loading}>{currencyOptions}</select>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <div className="input-group-text">{currencies[quoteAcronym].symbol}</div>
-              </div>
-              <input id="quote" className="form-control" value={quoteValue} onChange={this.changeQuoteValue} type="number"/>
-            </div>
-            <small className="text-secondary">{currencies[quoteAcronym].name}</small>
-          </div>
-        </form>
-        <canvas ref={this.chartRef}/>
-      </React.Fragment>
-    )
-  }
-}
+          <small className="text-secondary">{currencies[quoteAcronym].name}</small>
+        </div>
+      </form>
+      <canvas ref={chartRef} />
+    </React.Fragment>
+  );
+};
 
 export default CurrencyConverter;
