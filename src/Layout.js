@@ -12,9 +12,25 @@ const Layout = (props) => {
       <div className="container py-3">
         {props.children}
       </div>
-      <footer className="p-5 bg-light text-center">
-        <div className="mb-2">
-          <span className="mr-3">Built by Cory Daddona. Check out my <a href="https://github.com/Cory117">GitHub</a> and <a href="https://www.linkedin.com/in/cory-daddona-6237a3158/">LinkedIn</a></span>
+      <footer className="bg-light text-center">
+        <div className="container pt-3">
+          <section className="mb-3">
+            <a
+              className="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="https://github.com/Cory117"
+            >
+              <i className="bi bi-github"></i>
+            </a>
+            <a
+              className="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="https://www.linkedin.com/in/cory-daddona-6237a3158/"
+            >
+              <i className="bi bi-linkedin"></i>
+            </a>
+          </section>
+        </div>
+        <div className="text-center text-dark p-3" style={{ backgroundColor: "#f1f1f1" }}>
+          © 2024 Cory Daddona. All rights reserved.
         </div>
       </footer>
     </React.Fragment>
