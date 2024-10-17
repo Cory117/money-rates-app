@@ -7,7 +7,7 @@
 </p>
 
 ## Project Description
-Money rates is an app that lets you track current and historical foreign exchange rates. The data is fetched through Frankfurter API => https://www.frankfurter.app/
+Money rates is an app that lets you track current and historical foreign exchange rates. The data is fetched through Frankfurter API => https://frankfurter.dev/
 
 ## Technologies Used 
 - HTML
@@ -18,4 +18,3 @@ Money rates is an app that lets you track current and historical foreign exchang
 - Bootstrap
 - APIs
 - Chart.js
-- Build: Create React App
