@@ -18,12 +18,14 @@ const Layout = (props) => {
             <a
               className="btn btn-link btn-floating btn-lg text-dark m-1"
               href="https://github.com/Cory117"
+              target="_blank"
             >
               <i className="bi bi-github"></i>
             </a>
             <a
               className="btn btn-link btn-floating btn-lg text-dark m-1"
               href="https://www.linkedin.com/in/cory-daddona-6237a3158/"
+              target="_blank"
             >
               <i className="bi bi-linkedin"></i>
             </a>
