@@ -7,7 +7,9 @@
 </p>
 
 ## Project Description
-Money rates lets you track current and historical foreign exchange rates. The data is fetched through Frankfurter API => https://frankfurter.dev/
+Money rates lets you track current and historical foreign exchange rates.
+
+Currency data is fetched through Frankfurter API => https://frankfurter.dev/
 
 **Key Features:**
 
