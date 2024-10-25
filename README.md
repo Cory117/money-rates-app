@@ -2,7 +2,7 @@
 
 ## Small Screen Preview
 <p align="center">
-  <img align="top" src="screenshots/Screenshot 2024-08-27 163355.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2024-10-25 170200.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img align="top" src="screenshots/Screenshot 2024-10-10 163553.png" width="300" height="500">
 </p>
 
@@ -28,3 +28,6 @@ Currency data is fetched through Frankfurter API => https://frankfurter.dev/
 - Bootstrap
 - APIs
 - Chart.js
+
+## Credits
+Thanks to <a href="https://github.com/lipis">Lipis</a> for providing the collection of flag icons.
