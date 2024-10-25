@@ -33,6 +33,7 @@ const Home = () => {
             rate: data.rates[acronym],
             name: currencies[acronym].name,
             symbol: currencies[acronym].symbol,
+            flagCode: acronym.slice(0,2),
           }));
 
         setRates(ratesData);

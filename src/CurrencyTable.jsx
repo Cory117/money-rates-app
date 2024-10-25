@@ -6,6 +6,7 @@ const CurrencyTable = (props) => {
   if (!rates) {
     return null;
   }
+  
   return (
     <table className="table mt-4">
       <thead>
@@ -17,8 +18,18 @@ const CurrencyTable = (props) => {
       <tbody>
         {rates.map(currency =>
           <tr key={currency.acronym}>
-            <td>{currency.name} <small>({currency.acronym})</small></td>
-            <td className="text-right"><Link to={`/currencyconverter?base=${base}&quote=${currency.acronym}`}>{currency.rate.toFixed(6)}</Link></td>
+            <td>
+              <span 
+                class={`fi fi-${currency.flagCode.toLowerCase()}`}
+                style={{marginRight: "5px"}}
+              ></span>
+              {currency.name} <small>({currency.acronym})</small>
+            </td>
+            <td className="text-right">
+              <Link to={`/currencyconverter?base=${base}&quote=${currency.acronym}`}>
+                {currency.rate.toFixed(6)}
+              </Link>
+            </td>
           </tr>
         )}
       </tbody>
