@@ -4,23 +4,23 @@ import { Link } from "react-router-dom";
 const Layout = (props) => {
   const [theme, setTheme] = useState(() => {
     const initialTheme = localStorage.getItem("theme");
-		return initialTheme ? initialTheme : "light";
+    return initialTheme ? initialTheme : "light";
   });
 
   function getThemeFromLocalStorage() {
-		const savedTheme = localStorage.getItem("theme");
-		if (savedTheme) {
-			setTheme(savedTheme);
-		}
-	}
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }
 
   function toggleTheme() {
-		setTheme((prevTheme) => {
-			const newTheme = prevTheme === "light" ? "dark" : "light";
-			localStorage.setItem("theme", newTheme);
-			return newTheme;
-		});
-	}
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  }
 
   useEffect(() => {
     getThemeFromLocalStorage();
