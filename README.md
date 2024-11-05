@@ -2,8 +2,10 @@
 
 ## Small Screen Preview
 <p align="center">
-  <img align="top" src="screenshots/Screenshot 2024-10-25 170200.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="screenshots/Screenshot 2024-10-10 163553.png" width="300" height="500">
+  <img align="top" src="screenshots/Screenshot 2024-11-04 175838.png" width="200" height="300">
+  <img align="top" src="screenshots/Screenshot 2024-11-04 175930.png" width="200" height="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2024-11-04 180133.png" width="200" height="300">
+  <img align="top" src="screenshots/Screenshot 2024-11-04 180056.png" width="200" height="300">
 </p>
 
 ## Project Description
