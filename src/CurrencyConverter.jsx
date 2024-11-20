@@ -122,6 +122,12 @@ const CurrencyConverter = () => {
     </option>
   ));
 
+  const flipCurrencies = (event) => {
+    event.preventDefault();
+    setBaseAcronym(quoteAcronym);
+    setQuoteAcronym(baseAcronym);
+  };
+
   return (
     <React.Fragment>
       <div className="text-center p-3 mb-2">
@@ -155,7 +161,12 @@ const CurrencyConverter = () => {
           <small className="text-secondary">{currencies[baseAcronym].name}</small>
         </div>
         <div className="col-md-2 py-3 mb-3 d-flex justify-content-center align-items-center">
-          <h3>=</h3>
+          <button 
+            style={{ border: "none", background: "none" }}
+            onClick={flipCurrencies}
+          >
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
         </div>
         <div className="form-group col-md-5 mb-0">
           <select
