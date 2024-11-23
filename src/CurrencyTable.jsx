@@ -21,12 +21,15 @@ const CurrencyTable = (props) => {
             <td>
               <span 
                 class={`fi fi-${currency.flagCode.toLowerCase()}`}
-                style={{marginRight: "5px"}}
+                style={{ marginRight: "5px" }}
               ></span>
               {currency.name} <small>({currency.acronym})</small>
             </td>
             <td className="text-right">
-              <Link to={`/currencyconverter?base=${base}&quote=${currency.acronym}`}>
+              <Link 
+                to={`/currencyconverter?base=${base}&quote=${currency.acronym}`} 
+                style={{ textDecoration: "none" }}
+              >
                 {currency.rate.toFixed(6)}
               </Link>
             </td>
