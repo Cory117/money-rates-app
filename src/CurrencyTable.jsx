@@ -12,7 +12,8 @@ const CurrencyTable = (props) => {
       <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col" className="text-right">1.00 {base}</th>
+          <th scope="col" className="text-center">1.00 {base}</th>
+          <th scope="col" className="text-right">Change</th>
         </tr>
       </thead>
       <tbody>
@@ -25,13 +26,18 @@ const CurrencyTable = (props) => {
               ></span>
               {currency.name} <small>({currency.acronym})</small>
             </td>
-            <td className="text-right">
+            <td className="text-center">
               <Link 
                 to={`/currencyconverter?base=${base}&quote=${currency.acronym}`} 
                 style={{ textDecoration: "none" }}
               >
                 {currency.rate.toFixed(6)}
               </Link>
+            </td>
+            <td className="text-right">
+              <small style={{ color: currency.change < 0 ? "red" : "#10ad15" }}>
+                {currency.change}%
+              </small>
             </td>
           </tr>
         )}
