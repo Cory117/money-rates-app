@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Layout = (props) => {
+const Layout = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     const initialTheme = localStorage.getItem("theme");
     return initialTheme ? initialTheme : "light";
@@ -45,7 +45,7 @@ const Layout = (props) => {
         </button>
       </nav>
       <div className="container py-3" data-bs-theme={theme}>
-        {props.children}
+        {children}
       </div>
       <footer className={`bg-${theme} text-center`}>
         <div className="container pt-3">

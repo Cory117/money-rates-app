@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CurrencyTable = (props) => {
-  const { base, rates } = props;
-  if (!rates) {
-    return null;
-  }
+const CurrencyTable = ({ base, rates }) => {
+  if (!rates) { return null; }
   
   return (
     <table className="table mt-4">
