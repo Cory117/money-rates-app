@@ -2,7 +2,7 @@
 
 ## Small Screen Preview
 <p align="center">
-  <img align="top" src="screenshots/Screenshot 2024-11-22 180610.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2024-12-02 154807.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img align="top" src="screenshots/Screenshot 2024-11-20 162721.png" width="300" height="500">
 </p>
 
