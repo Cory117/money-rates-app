@@ -65,6 +65,10 @@ const Home = () => {
             </option>
           ))}
         </select>
+        <small>
+          (Note: Rate changes may display zero at certain times 
+          due to the API only updating daily during the work week.)
+        </small>
       </form>
       <CurrencyTable base={base} rates={rates} />
     </React.Fragment>
