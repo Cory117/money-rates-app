@@ -67,7 +67,7 @@ const Home = () => {
         </select>
         <small>
           (Note: Rate changes may display zero at certain times 
-          due to the API only updating daily during the work week.)
+          due to the API only updating the data so often.)
         </small>
       </form>
       <CurrencyTable base={base} rates={rates} />
