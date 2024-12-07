@@ -37,12 +37,13 @@ const Layout = ({ children }) => {
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span className="navbar-brand mx-2 h1">Money Rates</span>
         </Link>
-        <button 
-          class={`btn btn-outline-${theme === "dark" ? "light" : "dark"} btn-sm mt-1 mx-2`} 
-          onClick={toggleTheme}
-        >
-          {themeIcon}
-        </button>
+          <button 
+            onClick={toggleTheme}
+            class={`btn btn-sm mx-2`} 
+            style={{ color: theme === "light" ? "black" : "white", border: "none" }}
+          >
+            {themeIcon}
+          </button>
       </nav>
       <div className="container py-3" data-bs-theme={theme}>
         {children}
