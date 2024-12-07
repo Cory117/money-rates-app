@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
         </Link>
           <button 
             onClick={toggleTheme}
-            class={`btn btn-sm mx-2`} 
+            class={"btn btn-sm mx-2"} 
             style={{ color: theme === "light" ? "black" : "white", border: "none" }}
           >
             {themeIcon}
