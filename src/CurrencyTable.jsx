@@ -32,7 +32,13 @@ const CurrencyTable = ({ base, rates }) => {
               </Link>
             </td>
             <td className="text-right">
-              <small style={{ color: currency.change < 0 ? "red" : "#10ad15" }}>
+              <small 
+                style={{ color: 
+                  currency.change < 0 ? "red" 
+                  : currency.change > 0 ? "#10ad15" 
+                  : "gray" 
+                }}
+              >
                 {currency.change}%
               </small>
             </td>
