@@ -1,78 +1,66 @@
-import React, { useState, useEffect } from "react";
-import currencies from "./Currencies";
-import CurrencyTable from "./CurrencyTable";
+import React from 'react';
 
 const Home = () => {
-  const [base, setBase] = useState('USD');
-  const [rates, setRates] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getRatesData(base);
-  }, [base]);
-
-  const changeBase = (event) => {
-    setBase(event.target.value);
-  };
-
-  const getRatesData = async (base) => {
-    try {
-      setLoading(true);
-  
-      // Fetch today's rates
-      const todayResponse = await fetch(`https://api.frankfurter.app/latest?base=${base}`);
-      const todayData = await todayResponse.json();
-  
-      // Fetch yesterday's rates
-      const yesterday = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-      const yesterdayResponse = await fetch(`https://api.frankfurter.app/${yesterday}?base=${base}`);
-      const yesterdayData = await yesterdayResponse.json();
-
-      // Calculate rate changes
-      const ratesData = Object.keys(todayData.rates)
-        .filter(acronym => acronym !== base)
-        .map(acronym => {
-          const todayRate = todayData.rates[acronym];
-          const yesterdayRate = yesterdayData.rates[acronym];
-          const change = ((todayRate - yesterdayRate) / yesterdayRate) * 100;
-  
-          return {
-            acronym,
-            rate: todayRate,
-            name: currencies[acronym]?.name,
-            symbol: currencies[acronym]?.symbol,
-            flagCode: acronym.slice(0, 2),
-            change: change.toFixed(2),
-          };
-        });
-  
-      setRates(ratesData);
-    } catch (error) {
-      console.error('Error fetching rates:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <React.Fragment>
-      <form className="p-3 form-inline justify-content-center">
-        <h4 className="mb-2">Base currency: <b className="mr-2">1</b></h4>
-        <select value={base} onChange={changeBase} className="form-control mb-2" disabled={loading}>
-          {Object.keys(currencies).map(currencyAcronym => (
-            <option key={currencyAcronym} value={currencyAcronym}>
-              {currencyAcronym}
-            </option>
-          ))}
-        </select>
-        <small>
-          (Note: Rate changes may display zero at certain times 
-          due to the API only updating the data so often.)
-        </small>
-      </form>
-      <CurrencyTable base={base} rates={rates} />
-    </React.Fragment>
+    <div>
+      {/* Hero Section */}
+      <header className="text-center py-5">
+        <div className="container">
+          <h1 className="display-4 fw-bold">Money Rates</h1>
+          <p className="lead mt-2">
+            Your one-stop solution to track foreign exchange rates and cryptocurrency prices in real-time.
+          </p>
+        </div>
+      </header>
+
+      {/* Features Section */}
+      <section className="py-5">
+        <div className="container">
+          <h1 className="text-center mb-5">Features</h1>
+          <div className="row text-center">
+            <div className="col-md-3">
+              <h4>Real-Time FX Rates</h4>
+              <p>Stay updated with accurate and real-time foreign exchange rates for all major currencies.</p>
+            </div>
+            <div className="col-md-3">
+              <h4>Cryptocurrency Tracking</h4>
+              <p>Monitor the latest prices and trends for top cryptocurrencies like Bitcoin, Ethereum, and more.</p>
+            </div>
+            <div className="col-md-3">
+              <h4>Intuitive Design</h4>
+              <p>Enjoy a sleek, user-friendly interface designed to make tracking rates effortless.</p>
+            </div>
+            <div className="col-md-3">
+              <h4>Currency Flip</h4>
+              <p>Easily compare and flip currencies to get the rates you need, instantly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
+      <section className="py-5 text-center">
+        <div className="container">
+          <h2>Start Tracking Now!</h2>
+          <p className="lead">Stay up-to-date and never miss a rate change.</p>
+          <a 
+            href="/currenciespage" 
+            className="btn btn-lg btn-link mt-3" 
+            style={{ textDecoration: "none" }}
+          >
+            Currencies
+          </a>
+          <a 
+            href="/cryptopage" 
+            className="btn btn-lg btn-link mt-3"
+            style={{ textDecoration: "none" }}
+          >
+            Cryptocurrencies
+          </a>
+        </div>
+      </section>
+    </div>
   );
-};
+}
 
 export default Home;

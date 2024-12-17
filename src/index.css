@@ -23,3 +23,9 @@ code {
   --bg-color: #212529;
   --text-color: #ffffff;
 }
+
+@media (min-width: 992px) {
+  .themeButton {
+    border-left: 1px solid gray;
+  }
+}
