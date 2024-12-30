@@ -18,33 +18,19 @@ const CurrenciesPage = () => {
   const getRatesData = async (base) => {
     try {
       setLoading(true);
-  
-      // Fetch today's rates
-      const todayResponse = await fetch(`https://api.frankfurter.app/latest?base=${base}`);
-      const todayData = await todayResponse.json();
-  
-      // Fetch yesterday's rates
-      const yesterday = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-      const yesterdayResponse = await fetch(`https://api.frankfurter.app/${yesterday}?base=${base}`);
-      const yesterdayData = await yesterdayResponse.json();
 
-      // Calculate rate changes
-      const ratesData = Object.keys(todayData.rates)
-        .filter(acronym => acronym !== base)
-        .map(acronym => {
-          const todayRate = todayData.rates[acronym];
-          const yesterdayRate = yesterdayData.rates[acronym];
-          const change = ((todayRate - yesterdayRate) / yesterdayRate) * 100;
+      const currencyResponse = await fetch(`https://api.frankfurter.app/latest?base=${base}`);
+      const currencyData = await currencyResponse.json();
   
-          return {
-            acronym,
-            rate: todayRate,
-            name: currencies[acronym]?.name,
-            symbol: currencies[acronym]?.symbol,
-            flagCode: acronym.slice(0, 2),
-            change: change.toFixed(2),
-          };
-        });
+      const ratesData = Object.keys(currencyData.rates)
+        .filter(acronym => acronym !== base)
+        .map(acronym => ({
+          acronym,
+          rate: currencyData.rates[acronym],
+          name: currencies[acronym]?.name,
+          symbol: currencies[acronym]?.symbol,
+          flagCode: acronym.slice(0, 2),
+        }));
   
       setRates(ratesData);
     } catch (error) {
@@ -65,14 +51,10 @@ const CurrenciesPage = () => {
             </option>
           ))}
         </select>
-        <small>
-          (Note: Rate changes may display zero at certain times 
-          due to the API only updating the data so often.)
-        </small>
       </form>
       <CurrencyTable base={base} rates={rates} />
     </React.Fragment>
-  );
-};
+  )
+}
 
 export default CurrenciesPage;
