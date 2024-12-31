@@ -7,15 +7,21 @@
 </p>
 
 ## Project Description
-Money rates lets you track current and historical foreign exchange rates.
+Track foreign exchange rates and cryptocurrency prices in real-time.
 
-Currency data is fetched through Frankfurter API => https://frankfurter.dev/
+Currency data API => https://frankfurter.dev/
+<br>
+Crypto data API => https://www.coinlore.com/cryptocurrency-data-api
 
 **Key Features:**
 
-- **Real-time FX updates**: Keep up with the latest currency exchange rates.
+- **Real-time FX rates**: Keep up with the latest currency exchange rates.
+
+- **Cryptocurrency Tracking**: Monitor the latest prices and trends for top cryptocurrencies like Bitcoin, Ethereum, and more.
 
 - **Historical data**: Analyze trends by looking at rates over the past month.
+
+- **Currency Flip**: Easily compare and flip currencies to get the rates you need, instantly.
 
 - **User-friendly interface**: Easily navigate through different currencies and exchange rate comparisons.
 
