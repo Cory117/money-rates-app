@@ -2,16 +2,18 @@
 
 ## Small Screen Preview
 <p align="center">
-  <img align="top" src="screenshots/Screenshot 2024-12-02 154807.png" width="300" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="screenshots/Screenshot 2024-11-20 162721.png" width="300" height="500">
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222526.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222552.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222623.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222648.png" width="150" height="275">
 </p>
 
 ## Project Description
 Track foreign exchange rates and cryptocurrency prices in real-time.
 
-Currency data API => https://frankfurter.dev/
+Currency API => https://frankfurter.dev/
 <br>
-Crypto data API => https://www.coinlore.com/cryptocurrency-data-api
+Crypto API => https://www.coinlore.com/cryptocurrency-data-api
 
 **Key Features:**
 
