@@ -2,15 +2,17 @@
 
 ## Small Screen Preview
 <p align="center">
-  <img align="top" src="screenshots/Screenshot 2025-01-01 222526.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="screenshots/Screenshot 2025-01-01 222552.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="screenshots/Screenshot 2025-01-01 222623.png" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="top" src="screenshots/Screenshot 2025-01-01 222648.png" width="150" height="275">
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222526.png" alt="landing page" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222552.png" alt="currencies page" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222623.png" alt="currency converter page" width="150" height="275">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="top" src="screenshots/Screenshot 2025-01-01 222648.png" alt="crypto page" width="150" height="275">
 </p>
 
 ## Project Description
 Track foreign exchange rates and cryptocurrency prices in real-time.
 
+Live Site => https://moneyrates.netlify.app/
+<br>
 Currency API => https://frankfurter.dev/
 <br>
 Crypto API => https://www.coinlore.com/cryptocurrency-data-api
