@@ -54,6 +54,7 @@ const Layout = ({ children }) => {
               <a class="nav-link" href="/">Home</a>
               <a class="nav-link" href="/currenciespage">Currencies</a>
               <a class="nav-link" href="/cryptopage">Cryptocurrencies</a>
+              <a class="nav-link" href="/currencyconverter">Currency Converter</a>
             </div>
             <hr />
             <div class="navbar-nav ms-auto">
